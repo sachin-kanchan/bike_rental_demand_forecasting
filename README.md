@@ -95,7 +95,7 @@ A detailed explanation of these features can be found in `data_dictionary.txt`.
 ## How to Run
 1.  Clone the repository
 2.  Install the requirements using `pip install -r requirements.txt`.
-3.  Open the `boombikes.ipynb` using Jupyter Notebook or Jupyter Lab and run all cells.
+3.  Open the `bike_rental_regression_analysis.ipynb` using Jupyter Notebook or Jupyter Lab and run all cells.
 
 ## Author
 [Sachin Kanchan](https://github.com/sachin-kanchan)
