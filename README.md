@@ -1,4 +1,4 @@
-# Bike Rental Demand Prediction using Linear Regression
+# Bike Rental Demand Forecasting Model using Linear Regression
 
 ## Overview
 
