@@ -1,0 +1,87 @@
+# --- Secrets and Environment Variables --- #
+# Never commit sensitive information. Use a template file (e.g., .env.example) instead.
+*.env
+secrets.yml
+credentials.json
+*.pem
+*.key
+
+# --- Python Specific --- #
+# Virtual environments
+venv/
+env/
+.venv/
+.env/
+*/venv/
+*/env/
+
+# Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# --- Jupyter Notebook --- #
+# Checkpoint files
+.ipynb_checkpoints
+
+# --- IDE / Editor Specific --- #
+# Visual Studio Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# PyCharm
+.idea/
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# --- OS Specific --- #
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# --- Data & Log Files --- #
+# Log files
+*.log
+logs/
+
+# Large or sensitive data files - add your specific files here
+# For example:
+# data/large_dataset.csv
+# data/private_user_data.json
+
+# --- Test & Coverage Reports --- #
+.pytest_cache/
+.coverage
+htmlcov/
+nosetests.xml
+coverage.xml
+*.cover

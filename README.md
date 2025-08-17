@@ -1,99 +1,139 @@
-# Bike Rental Demand Forecasting Model using Linear Regression
+# Bike Rental Demand Forecasting using Linear Regression
 
 ## Overview
 
-This project focuses on building a multiple linear regression model to predict the demand for shared bikes using a dataset provided by BoomBikes, a US bike-sharing provider. The analysis aims to identify significant variables that influence bike rental demand and to create a model that accurately predicts future demand. This model is intended to help BoomBikes optimize their business strategy, especially in the post-COVID-19 recovery period.
+This project develops a multiple linear regression model to predict daily demand for shared bikes for BoomBikes, a US bike-sharing provider. The primary goal is to identify the key factors influencing bike rentals to help the company devise effective strategies for business growth, particularly in the post-pandemic era. By understanding the drivers of demand, BoomBikes can optimize its operations, marketing efforts, and overall business strategy.
 
 ## Problem Statement
-BoomBikes, a US-based bike-sharing provider, has recently experienced considerable dips in their revenues due to the ongoing COVID-19 pandemic. This has created significant challenges for the company to sustain itself in the current market conditions. Therefore, BoomBikes is developing a strategic business plan to accelerate its revenue recovery as the lockdown ends and the economy gradually restores.
 
-As part of this plan, BoomBikes wants to understand the demand for shared bikes after the quarantine situation ends. The goal is to prepare the company to meet people's needs and stand out from the competition, aiming for improved business performance and profitability.
+BoomBikes has faced a significant decline in revenue due to the COVID-19 pandemic. To ensure a strong recovery, the company aims to understand the factors that drive the demand for their bike-sharing service in the American market. This project addresses the following key questions:
 
-To achieve this goal, BoomBikes has engaged a consulting company to identify the key factors that influence the demand for shared bikes, specifically in the American market. The company seeks answers to the following questions:
+*   Which variables are significant in predicting the demand for shared bikes?
+*   How well do these variables explain the variance in bike demand?
 
-*   Which variables are statistically significant in predicting the demand for shared bikes?
-*   How well do these variables describe and explain variations in bike demand?
-
-The service provider has gathered a large dataset on daily bike demands in the American market, which includes meteorological surveys and data reflecting various usage patterns. You are required to model this demand using a multiple linear regression model. This model should help management understand how demands change with different features and use this knowledge to adjust their business strategy to meet those demand levels and exceed customers’ expectations. It would also help to gauge the demand dynamics of a new market.
+The insights from this model will empower BoomBikes to make data-driven decisions to meet customer demand and enhance profitability.
 
 ## Data
-The dataset used for this project is `day.csv`, which includes the following features:
--   **instant**: Record index.
--   **dteday**: Date of the rental.
--   **season**: Season (1: spring, 2: summer, 3: fall, 4: winter).
--   **yr**: Year (0: 2018, 1: 2019).
--   **mnth**: Month (1 to 12).
--   **holiday**: Whether the day is a holiday (1) or not (0).
--   **weekday**: Day of the week.
--   **workingday**: Whether the day is a working day (1) or not (0).
--   **weathersit**: Weather situation (1: Clear, 2: Mist, 3: Light Snow/Rain, 4: Heavy Rain).
--   **temp**: Temperature in Celsius.
--   **atemp**: Feeling temperature in Celsius.
--   **hum**: Humidity.
--   **windspeed**: Wind speed.
--   **casual**: Count of casual users.
--   **registered**: Count of registered users.
--   **cnt**: Total count of bike rentals (target variable).
 
-A detailed explanation of these features can be found in `data_dictionary.txt`.
+The analysis is based on the `day.csv` dataset, which contains daily bike rental data. Key features include:
+
+-   **Temporal Variables**: `dteday`, `season`, `yr`, `mnth`, `holiday`, `weekday`, `workingday`
+-   **Weather Variables**: `weathersit`, `temp`, `atemp`, `hum`, `windspeed`
+-   **Target Variable**: `cnt` (total daily bike rentals)
+
+A comprehensive data dictionary is available in `data_dictionary.txt`.
 
 ## Project Workflow
-1.  **Data Loading and Inspection:**
-    -   Loading the dataset from `day.csv`.
-    -   Examining the data structure, data types, and statistical summaries.
-    -   Checking for missing values.
-2.  **Data Preparation:**
-    -   Creating a copy of the original dataframe to work on.
-    -   Mapping numerical categories in 'season' and 'weathersit' to their corresponding string labels.
-    -   Converting 'dteday' to datetime format to extract additional temporal features like day of the week and month.
-    -   Dropping unnecessary columns ('instant', 'casual', 'registered') to avoid multicollinearity.
-    -   Handling Outliers using IQR capping.
-3.  **Exploratory Data Analysis (EDA):**
-    -   Analyzing the distribution of the target variable ('cnt').
-    -   Examining the distributions of numerical and categorical variables using histograms, boxplots, and countplots.
-    -   Time-series analysis of the target variable to understand trends.
-    -   Bivariate analysis to observe the relationship between categorical and numerical variables with the target variable.
-    -   Pair plots and correlation analysis to understand the relationships between numerical variables, identifying multicollinearity.
-4.  **Linear Regression Model Building:**
-    -   Creating dummy variables for categorical features.
-    -   Splitting the dataset into training and testing sets.
-    -   Scaling the numerical features using StandardScaler.
-    -   Using Recursive Feature Elimination (RFE) for feature selection, narrowing down to 15 features for the model.
-    -   Building the OLS regression model using the selected features.
-    -   Iterative feature selection to simplify the model further based on p-values and VIF values.
-    -   Residual analysis to validate model assumptions.
-    -   Making predictions on the test set.
-5.  **Model Evaluation:**
-    -   Evaluating the model's performance using R-squared on the test set.
-    -   Checking for the model assumptions like Linearity, Independence, Normality and Homoscedasticity.
-    -   Discussing the top 3 features contributing significantly to the target variable.
-6.  **Final Observations:**
-    -   Summarizing key insights and implications of model results for BoomBikes.
 
-## Key Findings
+The project followed a structured approach to ensure a robust and reliable model:
 
--   The project identified key factors that impact bike rental demand.
--   The regression model's performance was evaluated and interpreted thoroughly.
--   Recommendations are provided to BoomBikes for improving their business strategy.
--   Model assumptions have been verified and the model performs well on test data.
+1.  **Data Loading and Inspection**: Initial examination of the dataset's structure, data types, and for missing values.
+2.  **Data Preparation**:
+    *   Mapped categorical variables to their string representations for better interpretability.
+    *   Converted `dteday` to a datetime format to extract month and day of the week.
+    *   Dropped redundant columns (`instant`, `casual`, `registered`) to prevent data leakage and multicollinearity.
+    *   Handled outliers in `windspeed` and `hum` using IQR capping.
+3.  **Exploratory Data Analysis (EDA)**:
+    *   Analyzed the distribution of the target variable (`cnt`) and other numerical and categorical features.
+    *   Conducted time-series analysis to identify trends in bike rental demand.
+    *   Used bivariate and multivariate analysis to explore relationships between variables.
+4.  **Model Building**:
+    *   Created dummy variables for categorical features.
+    *   Split the data into training (80%) and testing (20%) sets.
+    *   Scaled numerical features using `StandardScaler`.
+    *   Employed Recursive Feature Elimination (RFE) to select the most impactful features.
+    *   Built an OLS (Ordinary Least Squares) regression model and iteratively refined it by analyzing p-values and VIF (Variance Inflation Factor) scores.
+5.  **Model Evaluation**:
+    *   Assessed the model's performance on the test set using the R-squared value.
+    *   Validated the assumptions of linear regression: Linearity, Independence, Normality, and Homoscedasticity.
+
+## Visual Insights from Exploratory Data Analysis
+
+Visualizations from the EDA phase reveal key patterns in bike rental demand.
+
+**1. Daily and Monthly Trends**
+The time-series plots illustrate the overall trend in bike rentals over the two-year period. The daily plot, along with a 30-day moving average, smooths out daily noise to show the underlying seasonal pattern and a noticeable year-over-year growth in demand. The monthly trend plot confirms the cyclical nature of demand, peaking during warmer months.
+
+![Daily Trend of Bike Rentals](visualizations/daily-bike-rentals.png)![Monthly Trend of Bike Rentals](visualizations/monthly-bike-rentals.png)
+
+**2. Rental Distribution by Month and Season**
+This plot provides a more detailed view of the interaction between month and season. We can see a clear progression of demand, starting low in the spring months, rising through the summer, peaking in the fall, and declining in the winter.
+
+![Rental Distribution by Month & Season](visualizations/rental-month-season.png)
+
+**3. Influence of Categorical Features**
+The boxplots below show how bike rentals vary across different categorical variables. It's clear that demand is highest in the **fall** and **summer**, and drops significantly during **light snow/rain**. Weekday usage remains relatively consistent.
+
+![Influence of Categorical Features on Bike Rentals](visualizations/rental-vs-categorical-features.png)
+
+## Key Findings and Model Performance
+
+The final linear regression model provides significant insights into the factors driving bike rental demand.
+
+### Model Performance
+
+*   **Training R-squared**: 83.0%
+*   **Test R-squared**: 78.0%
+
+The model explains 78% of the variance in bike rental demand on unseen data, indicating a strong predictive capability. The close alignment of the training and test R-squared values suggests that the model generalizes well and is not over-fitting.
+
+### Top 3 Predictor Variables
+
+The following features were identified as the most significant predictors of bike rental demand:
+
+1.  **Year (`yr`)**: The model shows a strong positive correlation with the year, indicating a growth in bike-sharing popularity over time. This is the most significant feature in the model.
+2.  **Temperature (`temp`)**: Higher temperatures are associated with a significant increase in bike rentals. This highlights the impact of favorable weather on demand.
+3.  **Weather Situation (`weathersit`)**:
+    *   **Light Snow/Rain**: This condition has a strong negative impact on bike rentals, leading to a substantial decrease in demand.
+    *   **Mist**: Misty conditions also negatively affect the number of rentals, though to a lesser extent than snow or rain.
+
+### Other Significant Factors
+
+*   **Seasons**:
+    *   **Winter**: Surprisingly, after accounting for other factors, the model indicates a positive association with winter. This could be due to the way seasons are defined in the dataset or other confounding variables.
+    *   **Summer and Fall**: Both seasons show a positive correlation with bike rentals compared to spring (the baseline).
+*   **Holidays**: Demand tends to be lower on holidays.
+*   **Months**: Certain months like September show a significant positive impact on demand.
+
+## Business Recommendations
+
+Based on the model's findings, here are some actionable recommendations for BoomBikes:
+
+1.  **Leverage Seasonal and Weather Trends**:
+    *   Promote bike rentals heavily during periods of good weather and in the summer and fall seasons.
+    *   Offer promotions or discounts on days with light snow or rain to encourage usage.
+    *   Develop marketing campaigns that highlight the benefits of cycling in different weather conditions.
+
+2.  **Capitalize on Growth Trends**:
+    *   The positive trend in `yr` suggests a growing market. BoomBikes should continue to invest in expanding their fleet and services.
+
+3.  **Optimize Operations for Non-Holidays**:
+    *   Since demand is higher on working days, ensure a higher availability of bikes in key business and commuter areas.
+
+4.  **Targeted Monthly Campaigns**:
+    *   Launch special marketing initiatives during high-demand months like September to maximize revenue.
 
 ## Repository Contents
--   `bike_rental_regression_analysis.ipynb`: Jupyter Notebook containing the code for data analysis and model building.
--   `day.csv`: Dataset used in the project.
--   `problem_statement.md`: Markdown file with the problem statement.
--   `data_dictionary.txt`: Text file containing the data dictionary.
+
+-   `bike_rental_regression_analysis.ipynb`: The Jupyter Notebook containing the complete analysis and model-building process.
+-   `day.csv`: The dataset used for this project.
+-   `data_dictionary.txt`: A detailed description of the dataset features.
+-   `visualizations/`: A folder containing key plots from the analysis.
 -   `README.md`: This file, providing an overview of the project.
 
-## Libraries Used
-- pandas
-- numpy
-- matplotlib
-- seaborn
-- scikit-learn
-- statsmodels
+## Libraries and Tools Used
+
+-   pandas
+-   numpy
+-   matplotlib
+-   seaborn
+-   scikit-learn
+-   statsmodels
 
 ## Author
-[Sachin Kanchan](https://github.com/sachin-kanchan)
+
+-   **Sachin Kanchan** - [GitHub Profile](https://github.com/sachin-kanchan)
 
 ## License
-This project is licensed under the [MIT License](LICENSE).
+
+This project is licensed under the MIT License. See the `LICENSE` file for details.
